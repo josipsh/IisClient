@@ -30,7 +30,7 @@ namespace IisClient
 
         private void SoldAsset_Click(object sender, RoutedEventArgs e)
         {
-
+            new AddSoldAssetRecordWindow().Show();
         }
 
         private void GetAnalyst_Click(object sender, RoutedEventArgs e)
