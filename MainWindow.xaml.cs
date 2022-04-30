@@ -15,14 +15,31 @@ using System.Windows.Shapes;
 
 namespace IisClient
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BoughtAsset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SoldAsset_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GetAnalyst_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void XmlRpc_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

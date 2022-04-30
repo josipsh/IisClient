@@ -5,8 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IisClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="100" Width="1000">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button 
+            Grid.Column="0"
+            Grid.Row="0"
+            Content="Create bought asset record - step 01"
+            Margin="10"
+            Name="BoughtAsset"
+            Click="BoughtAsset_Click"
+            />
+
+        <Button 
+            Grid.Column="1"
+            Grid.Row="0"
+            Content="Create sold asset record - step 02"
+            Margin="10"
+            Name="SoldAsset"
+            Click="SoldAsset_Click"
+            />
+
+        <Button 
+            Grid.Column="2"
+            Grid.Row="0"
+            Content="Get analyst - step 03"
+            Margin="10"
+            Name="GetAnalyst"
+            Click="GetAnalyst_Click"
+            />
+
+        <Button 
+            Grid.Column="3"
+            Grid.Row="0"
+            Content="Get weather data for the city - step 05"
+            Margin="10"
+            Name="XmlRpc"
+            Click="XmlRpc_Click"
+            />
 
     </Grid>
 </Window>
