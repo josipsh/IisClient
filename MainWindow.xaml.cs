@@ -40,7 +40,7 @@ namespace IisClient
 
         private void XmlRpc_Click(object sender, RoutedEventArgs e)
         {
-
+            new XmlRpcWindow().Show();
         }
     }
 }
