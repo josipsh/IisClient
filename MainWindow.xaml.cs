@@ -24,7 +24,8 @@ namespace IisClient
 
         private void BoughtAsset_Click(object sender, RoutedEventArgs e)
         {
-
+            AddBoughtAssetRecordWindow window= new AddBoughtAssetRecordWindow();
+            window.Show();
         }
 
         private void SoldAsset_Click(object sender, RoutedEventArgs e)
