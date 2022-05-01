@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IisClient.Dto;
+using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
 
 namespace IisClient
 {
-    /// <summary>
-    /// Interaction logic for XmlRpcWindow.xaml
-    /// </summary>
     public partial class XmlRpcWindow : Window
     {
         public XmlRpcWindow()
@@ -29,12 +18,8 @@ namespace IisClient
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            StringBuilder sb = new StringBuilder();
+            result.Text = "";
 
-            sb.Append($"Data result for city {cityName.Text}: \n");
-            sb.Append($"\t Temp: 10.5 \n");
-            sb.Append($"\t Temp: 10.5 \n");
-            sb.Append($"\t Temp: 10.5 \n");
             String res = DoRequest(cityName.Text);
 
             result.Text = res;
@@ -59,15 +44,31 @@ namespace IisClient
             XmlDocument responseDoc = new XmlDocument();
             responseDoc.Load(responseBody);
 
-            return "";
+            string encodedBody = responseDoc.GetElementsByTagName("value").Item(0).InnerText;
+
+            string json = Encoding.UTF8.GetString(Convert.FromBase64String(encodedBody));
+
+            WeatherDataDto? weatherData = JsonConvert.DeserializeObject<WeatherDataDto>(json);
+
+            if (weatherData == null)
+            {
+                return "Unexpeced error occured!";
+            }
+
+            if (weatherData.errorMessage.Length > 0)
+            {
+                return weatherData.errorMessage;
+            }
+
+            return weatherData.ToString();
         }
 
         private byte[] PrepareBody(string city)
         {
             XmlDocument doc = new XmlDocument();
-            doc.LoadXml("");
+            doc.Load("Helpers/XmlPrxRequestBodyTemplate.xml");
             doc.DocumentElement.ChildNodes[0].InnerText = "DHMZ.fetchNewestDataFotCity";
-            doc.DocumentElement.ChildNodes[1].ChildNodes[1].ChildNodes[0].ChildNodes[0].InnerText = city;
+            doc.DocumentElement.ChildNodes[1].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText = city;
 
             MemoryStream stream = new MemoryStream();
             doc.Save(stream);
